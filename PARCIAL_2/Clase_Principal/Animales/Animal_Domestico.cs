@@ -18,18 +18,42 @@ namespace PARCIAL_2.Clase_Principal.Animales
             Console.WriteLine("El perro tiene 4 patas.");
         }
 
+        // Delegado
+        public void ImprimirH(ImprimirHDelegate imprimirDelegate)
+        {
+            imprimirDelegate();
+        }
+
+        public void ImprimirPer()
+        {
+            Console.WriteLine("Nombre Cientifico: Canis lupus familiaris");
+        }
+
+        // Declaración del evento basado en el delegado
+        public event ImprimirHDelegate PerroImpreso;
+
+        public void ImprimirP()
+        {
+            // Verificar si hay suscriptores al evento
+            if (PerroImpreso != null)
+            {
+
+                PerroImpreso();
+
+            }
+        }
+
         public string MostrarInformacionAD()
         {
 
             MostrarInformacion();        
-            Console.ForegroundColor = ConsoleColor.Red;
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
             string info = $"Es un Animal de Hogar: {EsDeCasa}";
-             Extremidades();
-            Console.ResetColor();
-           
-
+            Extremidades();
+            ImprimirH(ImprimirPer);
+            ImprimirP();
             return info;
-
+            
 
         }
     }

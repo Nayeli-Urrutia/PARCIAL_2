@@ -11,20 +11,47 @@ namespace PARCIAL_2.Clase_Principal.Clase_Animales
     {
         public bool EsDepredador { get; set; }
 
-        //interface
+       
+
+        // Interface
         public override void Extremidades()
         {
             Console.WriteLine("El Tiburon Blanco tiene Aletas.");
         }
+
+        // Delegado
+        public void ImprimirH(ImprimirHDelegate imprimirDelegate)
+        {
+            imprimirDelegate();
+        }
+        public void Imprimirtib()
+        {
+            Console.WriteLine("Nombre Cientifico: Carcharodon carcharias");
+        }
+
+        // Declaración del evento basado en el delegado
+        public event ImprimirHDelegate TiburonImpreso;
+
+        public void ImprimirH()
+        {
+            // Verificar si hay suscriptores al evento
+            if (TiburonImpreso != null)
+            {
+
+                TiburonImpreso();
+            }
+        }
+
         public string MostrarInformacionAC()
         {
-            // Poliformismo
+            // Polimorfismo
             MostrarInformacion();
-           
-            Console.ForegroundColor = ConsoleColor.Red;
-            string ani = $"Es un Animal Depredador: {EsDepredador}";            
+
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            string ani = $"Es un Animal Depredador: {EsDepredador}";
             Extremidades();
-            Console.ResetColor();
+            Imprimirtib();
+            ImprimirH();
 
             return ani;
 

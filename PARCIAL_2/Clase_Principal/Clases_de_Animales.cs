@@ -11,6 +11,18 @@ namespace PARCIAL_2.parcial_2
     internal class Clases_de_Animales : IAnimal
      
     {
+        private Animal_Domestico[] disponibles;
+       
+        public Animal_Domestico this [int indice]
+        {
+            get { return disponibles[indice];}
+            set { disponibles[indice] = value;}
+        }
+
+        // Delegado 
+        public delegate void ImprimirHDelegate();
+
+        //interface
         public virtual void Extremidades()
         {
             Console.WriteLine("El animal emite un sonido.");
@@ -61,7 +73,7 @@ namespace PARCIAL_2.parcial_2
             set { emitir_sonido = value; }
         }
 
-
+        // 3. Polimorfismo
         public void MostrarInformacion()
         {
 
@@ -71,14 +83,10 @@ namespace PARCIAL_2.parcial_2
             Console.WriteLine($"Habitat:      {Habitat}");
             Console.WriteLine($"Alimentacion: {Alimentacion}");
             Console.WriteLine($"Reproducción: {Reproduccion}");
-
-            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine($"{Nombre} puede tener hasta {Numero_crias} crias ");
             Console.WriteLine($"El sonido que emite {Nombre} es {Emitir_sonido}");
 
-            Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine("******************************************************");
-            Console.ResetColor();
+          
 
 
 

@@ -1,4 +1,5 @@
-﻿using PARCIAL_2.parcial_2;
+﻿using PARCIAL_2.Clase_Principal.Animales;
+using PARCIAL_2.parcial_2;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,25 +11,50 @@ namespace PARCIAL_2.Clase_Principal.Clase_Animales
     internal class Animal_Salvaje : Clases_de_Animales
     {
         public bool EsManada { get; set; }
-        
-        //interface
+
+        // Interface
         public override void Extremidades()
         {
-            Console.WriteLine("El Leon tiene 4 patas.");
+            Console.WriteLine("El León tiene 4 patas.");
+        }
+
+        // Delegado
+        public void ImprimirH(ImprimirHDelegate imprimirDelegate)
+        {
+            imprimirDelegate();
+        }
+
+        public void ImprimirL()
+        {
+            Console.WriteLine("Nombre Cientifico: Panthera leo");
+        }
+
+        // Declaración del evento basado en el delegado
+        public event ImprimirHDelegate LeonImpreso;
+
+        public void ImprimirLE()
+        {
+            // Verificar si hay suscriptores al evento
+            if (LeonImpreso != null)
+            {
+
+                LeonImpreso();
+            }
         }
 
         public string MostrarInformacionAS()
         {
-            // Poliformismo
+            // Polimorfismo
             MostrarInformacion();
-            Console.ForegroundColor = ConsoleColor.Red;
-            string leo= $"Es un Animal que caza en Manada: {EsManada}";
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            string info = $"Es un Animal que caza en Manada: {EsManada}";
             Extremidades();
-            Console.ResetColor();
+            ImprimirH(ImprimirL);
+            ImprimirLE();
 
-            return leo;
-
-            
+            return info;
+          
         }
+
     }
-}
+    }
